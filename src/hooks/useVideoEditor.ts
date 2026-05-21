@@ -146,7 +146,7 @@ export function useVideoEditor() {
   const [overlayPosition, setOverlayPosition] = useState<OverlayPosition>("bottom-right");
   const [overlaySize, setOverlaySize] = useState(150);
   const [overlayOpacity, setOverlayOpacity] = useState(100);
-
+  const [currentTime, setCurrentTime] = useState(0);
  const updateRecipe = useCallback((patch: Partial<EditRecipe>) => {
   setRecipe((prev) => {
     const next = { ...prev, ...patch };
@@ -565,7 +565,13 @@ export function useVideoEditor() {
       videoRef.current.currentTime = time;
     }
   }, []);
-
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const handleTimeUpdate = () => setCurrentTime(video.currentTime);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    return () => video.removeEventListener("timeupdate", handleTimeUpdate);
+  });
   return {
     file,
     duration,
@@ -600,5 +606,6 @@ export function useVideoEditor() {
     overlayOpacity,
     setOverlayOpacity,
     recommendedPreset,
+    currentTime,
   };
 }

@@ -120,6 +120,7 @@ export default function VideoEditor() {
     overlaySize, setOverlaySize,
     overlayOpacity, setOverlayOpacity,
     recommendedPreset,
+    currentTime,
   } = useVideoEditor();
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
@@ -208,7 +209,7 @@ export default function VideoEditor() {
                     <ThumbnailStrip
                       videoSrc={videoSrc}
                       duration={duration}
-                      currentTime={videoRef.current?.currentTime ?? 0}
+                      currentTime={currentTime}
                       trimStart={recipe.trimStart ?? 0}
                       trimEnd={recipe.trimEnd ?? duration}
                       onSeek={seekTo}
