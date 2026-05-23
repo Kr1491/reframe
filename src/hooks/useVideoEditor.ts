@@ -628,7 +628,6 @@ export function useVideoEditor() {
     video.addEventListener("timeupdate", handleTimeUpdate);
     return () => video.removeEventListener("timeupdate", handleTimeUpdate);
   },[]);
-  });
 
   const toggleSound = useCallback(() => {
   updateRecipe({ soundOnCompletion: !recipe.soundOnCompletion });
