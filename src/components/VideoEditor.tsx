@@ -221,6 +221,8 @@ export default function VideoEditor() {
     status,
     cancelExport,
     onToggleShortcutsModal: () => {},
+    currentTime,
+    duration,
   });
 
   const [copied, setCopied] = useState(false);

@@ -11,6 +11,8 @@ interface UseKeyboardShortcutsProps {
   status: ExportStatus;
   cancelExport: () => void;
   onToggleShortcutsModal: () => void;
+  currentTime: number;
+  duration: number;
 }
 
 export function useKeyboardShortcuts({
@@ -22,6 +24,8 @@ export function useKeyboardShortcuts({
   status,
   cancelExport,
   onToggleShortcutsModal,
+  currentTime,
+  duration,
 }: UseKeyboardShortcutsProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -62,6 +66,14 @@ export function useKeyboardShortcuts({
         case "?":
           onToggleShortcutsModal();
           break;
+        case "i":
+        case "I":
+          updateRecipe({trimStart: Math.floor(currentTime)});
+          break;
+        case "o":
+        case "O":
+          updateRecipe({trimEnd: Math.floor(currentTime)});
+          break;
 
         default:
           if (e.key >= "1" && e.key <= "9") {
@@ -75,5 +87,5 @@ export function useKeyboardShortcuts({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [file, recipe, resetSettings, updateRecipe, handleExport, status, cancelExport, onToggleShortcutsModal]);
+  }, [file, recipe, resetSettings, updateRecipe, handleExport, status, cancelExport, onToggleShortcutsModal, currentTime, duration]);
 }
