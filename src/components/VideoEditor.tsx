@@ -583,6 +583,30 @@ export default function VideoEditor() {
                           className="w-full accent-film-600"
                         />
                       </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <label htmlFor="hue-slider">Hue</label>
+                          <button
+                            type="button"
+                            onClick={() => updateRecipe({ hue: 0 })}
+                            className="text-film-500 hover:underline"
+                            aria-label="reset-hue"
+                          >
+                            Reset
+                          </button>
+                        </div>
+                        <input
+                          id="hue-slider"
+                          type="range"
+                          min="-180"
+                          max="180"
+                          step="1"
+                          value={recipe.hue}
+                          onChange={(e) => updateRecipe({ hue: Number(e.target.value) })}
+                          aria-label="Adjust hue"
+                          className="w-full accent-film-600"
+                        />
+                      </div>
                     </div>
                   </Section>
                   <Section icon={<SlidersHorizontal size={12} />} title="Output format" delay={190}>
